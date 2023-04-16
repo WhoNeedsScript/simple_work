@@ -1,17 +1,24 @@
-import Image from 'next/image'
 import { Inter } from 'next/font/google'
-import Link from 'next/link'
-import Login from '../../components/login/login'
+import Container from '@/app/components/glassmorph/Container'
+import ClientOnly from '@/app/components/general/ClientOnly'
+import Login from '@/app/components/login/Login'
 
 
 const inter = Inter({ subsets: ['latin'] })
 export default function LoginPage() {
+  
 
   return (
-    <main >
-        <div className="container h-96 w-96 bg-white bg-opacity-40 rounded-2xl shadow-5xl relative z-2 border border-opacity-30 border-r-0 border-b-0 backdrop-filter backdrop-blur-sm">
-
-        </div>
-      </main>
+    <main
+    >
+      <ClientOnly>
+      <div className='flex items-center justify-center h-screen'>
+      <Container height={46} width={46}>        
+        <Login/>
+      </Container>
+      </div>
+      </ClientOnly>
+      
+    </main>
   )
 }

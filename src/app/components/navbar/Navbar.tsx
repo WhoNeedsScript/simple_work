@@ -1,11 +1,23 @@
 import Container from "../Container";
 import Logo from "./Logo";
 
-const Navbar=()=>{
+interface NavbarProps{
+    children: React.ReactNode;
+    width?:Number;
+    height?:Number;
+}
+
+const Navbar:React.FC<NavbarProps> =({
+    children,
+    width,
+    height
+})=>{
     return(
         <div 
             className="
                 fix 
+                flex-shrink-0 
+                flex-basis-auto
                 h-full 
                 w-40
               bg-white 
@@ -25,13 +37,13 @@ const Navbar=()=>{
                     <div
                         className="
                           flex
-                          flex-row
+                          flex-col
                           items-center
                           justify-center
                           gap-3
                           md:gap-0"
                     >
-                        <Logo/>
+                        {children}
                     </div>
                 </Container>
             </div>

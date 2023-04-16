@@ -14,8 +14,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className=' h-screen w-screen relative overflow-hidden flex items-center'>
-        <Navbar/>
+      <body className='absolute h-screen w-screen overflow-hidden'>
         {children}
       </body>
     </html>

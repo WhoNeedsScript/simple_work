@@ -1,5 +1,5 @@
 import { Inter } from 'next/font/google'
-import Login from './components/login/login'
+import Login from './components/login/LoginForm'
 
 const inter = Inter({ subsets: ['latin'] })
 
