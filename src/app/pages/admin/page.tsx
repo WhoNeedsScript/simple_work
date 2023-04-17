@@ -7,6 +7,8 @@ import Button from "@/app/components/glassmorph/Button";
 import Navbar from "@/app/components/navbar/Navbar";
 import { useState } from "react";
 
+import DistrictCourtDashboard from "@/app/components/districtCourt/DistrictCourtDashboard";
+
 export default function AdminPage() {
   const [dashboard, setDashboard] = useState("");
 
@@ -26,6 +28,8 @@ export default function AdminPage() {
           <Container height={100} width={100}>   
             {dashboard === "legalDashboard" ? (
               <LegalFormDashboard />
+            ) : dashboard === "districtCourtDashboard" ? (
+              <DistrictCourtDashboard />
             ) : (
               <div/>
             )}

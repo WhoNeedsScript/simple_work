@@ -1,49 +1,29 @@
 'use client'
 
-import {FC, useState} from 'react'
+import {Children, FC, useState} from 'react'
 import CheckBoxWithLabel from '../checkboxes/CheckboxWithLabel'
 import Button from '../../glassmorph/Button'
+import Input from '../inputs/input'
 
 interface ListItemProps{
-    text:string,
-    initChecked:boolean,
-    onClickUpdate:any,
-    onClickDelete:any,
-    
+    children:any,
+    updateItem:any,
+    deleteItem:any   
 }
 
 const ListItem:FC<ListItemProps> = ({
-    text,
-    initChecked,
-    onClickUpdate,
-    onClickDelete,
-    
+    children,
+    updateItem,
+    deleteItem
 })=>
 {
    
-    const [hbr,setHBR] = useState(initChecked);
-    
-    const changeHBR=(isChecked: boolean)=>{
-        console.log(isChecked)
-        setHBR(isChecked)
-    }
-
-    
-    const updateLegalForomHandle = (event:any)=>{
-        event.preventDefault();
-        console.log(hbr)
-        onClickUpdate(text,hbr)
-    }
-
-    const deleteLegalForomHandle = (event:any)=>{
-        event.preventDefault();
-        onClickDelete(text)
-    }
+   
     return(
         <div className='flex place-content-between'>
-            <CheckBoxWithLabel checkedState={hbr}  text={text} onChange={changeHBR}/>
-            <Button text='Speichern' onClick={updateLegalForomHandle}/>
-            <Button text='Löschen' onClick={deleteLegalForomHandle}/>
+            {children}
+            <Button text='Speichern' onClick={updateItem}/>
+            <Button text='Löschen' onClick={deleteItem}/>
         </div>
     )
 }

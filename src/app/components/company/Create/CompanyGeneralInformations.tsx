@@ -6,7 +6,7 @@ import Link from 'next/link';
 import Button from '../../glassmorph/Button';
 import UserService from '../../../services/user'
 import InputWithLable from '../../general/inputs/InputWithLable';
-import { LegalForm } from '@/app/types/legalform.d';
+import { LegalForm } from '@/app/types/legalForm.d';
 import ComboboxWithLabel from '../../general/combobox/ComboBoxWithLabel';
 import LegalFormService from '../../../services/legalForm'
 

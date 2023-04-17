@@ -10,7 +10,7 @@ import ScrollableList from '../general/list/ScrollableList';
 import ListItem from '../general/list/ListItem';
 import legalForm from '../../services/legalForm';
 import { hasSubscribers } from 'diagnostics_channel';
-import { LegalForm } from '@/app/types/legalform.d';
+import { LegalForm } from '@/app/types/legalForm.d';
 
 interface LegalFormListProps{
   legalForms:any[];
