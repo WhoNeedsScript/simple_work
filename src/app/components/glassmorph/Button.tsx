@@ -19,6 +19,7 @@ const Button:React.FC<ButtonProps> =({
         <input 
           type="submit" 
           className="
+          
             cursor-pointer 
             font-poppins 
             rounded-full 

@@ -1,51 +1,27 @@
 'use client';
 
-import {FC, use, useEffect, useState} from 'react'
-import DistrictCourtService from '../../services/districtCourt'
+import {FC} from 'react'
 import ScrollableList from '../general/list/ScrollableList';
+import { useSelector } from 'react-redux';
 import { DistrictCourt } from '@/app/types/districtCourt.d';
 import DistrictCourtListItem from './DistrictCourtListItem';
 
 interface DistrictCourtListProps{
-  districtCourts: DistrictCourt[];
-  changeDistrictCourts:any
+ 
 }
 
 const DistrictCourtList:FC<DistrictCourtListProps> = ({
-  districtCourts,
-  changeDistrictCourts
+  
 })=>
 {
-    const deleteDistrictCourt=((uuid:string)=>
-    {
-      DistrictCourtService
-      .DeleteDistrictCourt(districtCourts.find((districtCourt: DistrictCourt) => districtCourt.uuid === uuid))
-      .then(response => {
-        changeDistrictCourts(districtCourts.filter((districtCourt:DistrictCourt) => districtCourt,uuid !== uuid))
-      })
-    })
-
-    const updateDistrictCourt=(districtCourt:DistrictCourt)=>
-    { 
-      DistrictCourtService
-      .UpdateDistrictCourt(districtCourt)
-      .then(response => {
-          changeDistrictCourts(
-            districtCourts.map(
-              (mDistrictCourt:DistrictCourt) => mDistrictCourt.uuid !== districtCourt.uuid ? mDistrictCourt : districtCourt
-            )
-          )
-        })
-    }
-  
-
+  const districtCourts = useSelector((state:any)=>state.districtCourtState.districtCourts);
     return(
         <ScrollableList children={
           districtCourts != null ?
           districtCourts.map((districtCourt:DistrictCourt) => (
-           <DistrictCourtListItem passedDistrictCourt={districtCourt} onClickDelete={deleteDistrictCourt} onClickUpdate={updateDistrictCourt}/>
+           <DistrictCourtListItem key={districtCourt.uuid!} id={districtCourt.uuid!}/>
           ))
-          :<div/>
+          :<div />
         }/>
     )
 }

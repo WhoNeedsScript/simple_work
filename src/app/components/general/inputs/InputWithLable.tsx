@@ -23,7 +23,7 @@ const InputWithLable:FC<InputWithLableProps> = ({
        (
             <div>
                 <p>{text}</p>
-                <input onChange={onChange} value={value} placeholder={placeholder} className="rounded-sms h-30 w-30 input-text m-3"></input>
+                <input onChange={()=>onChange(value)} value={value} placeholder={placeholder} className="rounded-sms h-30 w-30 input-text m-3"></input>
             </div>
         )
         : textPosition ==  "horizontal"?

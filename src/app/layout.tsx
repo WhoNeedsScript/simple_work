@@ -1,4 +1,5 @@
 
+import Providers from './components/general/Providers'
 import Navbar from './components/navbar/Navbar'
 import './globals.css'
 
@@ -14,8 +15,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className='absolute h-screen w-screen overflow-hidden'>
-        {children}
+      <body className='min-h-screen w-screen fix'>
+       <Providers>
+         {children}
+       </Providers>
+       
       </body>
     </html>
   )

@@ -1,11 +1,17 @@
 'use client';
 
-import {FC, useEffect, useState} from 'react'
+import {FC, useEffect} from 'react'
 import Button from '../glassmorph/Button';
-import DistrictCourtService from '../../services/districtCourt'
-import { DistrictCourt } from '@/app/types/districtCourt.d';
-import DistrictCourtList from './DistrictCourtList';
+import FederalStateService from '../../services/federalState'
+import TaxOfficeList from './DistrictCourtList';
 import InputWithLable from '../general/inputs/InputWithLable';
+import FederalStateComboBox from '../federalState/FederalStateCombobox';
+import { useDispatch, useSelector } from 'react-redux';
+import DistrictCourtService from '../../services/districtCourt'
+import { addFederalStates, selectFederalStateByUuid } from '@/app/store/features/federalStateSlice';
+import { store } from '@/app/store/store';
+import { DistrictCourt } from '@/app/types/districtCourt.d';
+import { addDistrictCourt, addDistrictCourts, updateNewDistrictCourt } from '@/app/store/features/districtCourtSlice';
 
 
 interface DistrictCourtDashboardProps{
@@ -16,69 +22,76 @@ const DistrictCourtDashboard:FC<DistrictCourtDashboardProps> = ({
   
 })=>
 {
-    const [districtCourt,setDistrictCourt]= useState<DistrictCourt>({ name: '', number: 0 });
-    const [districtCourts, setDistrictCourts] = useState<DistrictCourt[]>([]);
+  const dispatch = useDispatch();
 
-    const changeNumber=(number: number)=>{
-        let changedDistrictCourt:DistrictCourt = {...districtCourt};
-        changedDistrictCourt.number = number
-        setDistrictCourt(changedDistrictCourt)
-    }
-
-    const changeName=(name: string)=>{
-        let changedDistrictCourt:DistrictCourt = {...districtCourt};
-        changedDistrictCourt.name = name
-        setDistrictCourt(changedDistrictCourt)
-    }
-    
-    const changeDistrictCourts=(districtCourts: DistrictCourt[])=>
-    {
-        setDistrictCourts(districtCourts)
-    }
-  
-
-  
-    useEffect(() => {
-        DistrictCourtService
-          .GetAllDistrictCourts()
-          .then(response => {
-            setDistrictCourts(response.resultDistrictCourts)
-          })
-      }, [])
-    
+  useEffect(() => {
+    DistrictCourtService
+      .GetAllDistrictCourts()
+      .then(response => {
+        dispatch(addDistrictCourts(response.resultDistrictCourts));
+        });
+        
+      FederalStateService
+        .GetAllFederalStates()
+        .then(response => {
+          dispatch(addFederalStates(response.resultFederalStates))
+        })
+  }, []);
+ 
    
-    
+    const newDistrictCourt = useSelector((state:any)=>state.districtCourtState.newDistrictCourt)
 
-    const createLegalForomHandle = (event:any)=>{
+    const changeName = (event: any, districtCourt: DistrictCourt) => {
+      let changedDistrictCourt: DistrictCourt = { ...districtCourt };
+      changedDistrictCourt.name = event.target.value;
+      dispatch(updateNewDistrictCourt(changedDistrictCourt));
+    };
+  
+    const changeFederalState = (event: { value: string }, districtCourt: DistrictCourt) => {
+      let changedDistrictCourt: DistrictCourt = { ...districtCourt };
+      const selectedFederalState = selectFederalStateByUuid(store.getState(), event.value);
+      if (selectedFederalState) {
+        changedDistrictCourt.federalState = selectedFederalState;
+        dispatch(updateNewDistrictCourt(changedDistrictCourt));
+      }
+    };
+  
+    
+    
+    const createTaxOfficeHandle = (event:any)=>{
         event.preventDefault();
-        if(districtCourt.name.length !== 0 && districtCourt.number !== 0)
+        if(newDistrictCourt.name.length !== 0)
         {
           DistrictCourtService
-          .CreateDistrictCourt(districtCourt)
+          .CreateDistrictCourt(newDistrictCourt)
           .then(response => {
-            setDistrictCourts(districtCourts.concat(districtCourt));
+            let changedNewDistrictCourt:DistrictCourt = {...newDistrictCourt};
+            changedNewDistrictCourt.uuid =  response
+            dispatch(addDistrictCourt(changedNewDistrictCourt));
+            dispatch(updateNewDistrictCourt({uuid:"",name:"",federalState:{uuid:"",abbreviation:"",name:""}}));
           })
         }
     }
-        
-       
-
-    return(
-      
-        <div>
-        
-            <div className='flex place-content-between'>
-                <InputWithLable text='Name' textPosition='horizontal' placeholder='Name' value={districtCourt.name} onChange={changeName}/>
-                <InputWithLable text='Nummer' textPosition='horizontal' placeholder='Nummer' value={districtCourt.number} onChange={changeNumber}/>
-                <Button onClick={createLegalForomHandle} text='Speichern'/>
-            </div>
-            <div>
-                <DistrictCourtList districtCourts={districtCourts} changeDistrictCourts={changeDistrictCourts} />
-            </div>
-            
+  
+    return (
+      <div>
+        <div className="flex place-content-between">
+          <InputWithLable
+            text="Name"
+            textPosition="horizontal"
+            placeholder="Name"
+            value={newDistrictCourt.name}
+            onChange={(event:any) => changeName(event, newDistrictCourt)}
+          />
+          <FederalStateComboBox selected={newDistrictCourt.federalState} onChange={(event:any) => changeFederalState(event, newDistrictCourt)} />
+          <Button onClick={createTaxOfficeHandle} text="Speichern" />
         </div>
-    )
-}
+        <div>
+          <TaxOfficeList />
+        </div>
+      </div>
+    );
+  };
 
 
 export default DistrictCourtDashboard;

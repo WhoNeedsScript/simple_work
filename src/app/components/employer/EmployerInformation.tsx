@@ -1,11 +1,11 @@
 'use client';
 
 import {FC, useState} from 'react'
-import ClientOnly from '../../general/ClientOnly';
-import Container from '../../glassmorph/Container';
-import Sidebar from '../../general/sidebar/Sidebar';
-import CompanyGeneralInformations from './CompanyGeneralInformations';
-import CompanyAdditionalInformations from './CompanyAdditionalInformations';
+import ClientOnly from '../general/ClientOnly';
+import Container from '../glassmorph/Container';
+import Sidebar from '../general/sidebar/Sidebar';
+import CompanyGeneralInformations from './EmployerGeneralInformations';
+import CompanyAdditionalInformations from './EmployerAdditionalInformations';
 enum ResultType {
     FULL = "full",
     SEMI_FULL = "semi-full",

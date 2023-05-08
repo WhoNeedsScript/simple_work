@@ -15,11 +15,11 @@ const Navbar:React.FC<NavbarProps> =({
     return(
         <div 
             className="
-                fix 
+                text-center
                 flex-shrink-0 
                 flex-basis-auto
-                h-full 
-                w-40
+                min-h-full
+                w-23
               bg-white 
                 bg-opacity-40
                 rounded-2xl 
@@ -30,7 +30,7 @@ const Navbar:React.FC<NavbarProps> =({
         >
             <div 
                 className="
-                py-4 
+                
                 border-b-[1px]"
             >
                 <Container>

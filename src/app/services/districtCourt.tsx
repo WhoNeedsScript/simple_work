@@ -1,21 +1,19 @@
 import axios from 'axios'
 import { DistrictCourt } from '../types/districtCourt.d';
-const baseUrl = 'https://localhost:7136/api/DistrictCourt/'
+const baseUrl = 'http://37.120.161.198:3001/api/DistrictCourt/'
 
-export async function CreateDistrictCourt(DistrictCourt:DistrictCourt) {
+export async function CreateDistrictCourt(districtCourt:DistrictCourt) {
   try {
-    console.log(DistrictCourt)
-    const response = await axios.post(`${baseUrl}CreateDistrictCourt`, DistrictCourt);
+    const response = await axios.post(`${baseUrl}CreateDistrictCourt`, districtCourt);
     return response.data;
   } catch (error) {
     return null;
   }
 }
 
-export async function UpdateDistrictCourt(DistrictCourt:DistrictCourt) {
+export async function UpdateDistrictCourt(districtCourt:DistrictCourt) {
     try {
-        console.log(DistrictCourt)
-      const response = await axios.post(`${baseUrl}UpdateDistrictCourt`, DistrictCourt);
+      const response = await axios.post(`${baseUrl}UpdateDistrictCourt`, districtCourt);
     
       return response.data;
     } catch (error) {
@@ -27,7 +25,6 @@ export async function UpdateDistrictCourt(DistrictCourt:DistrictCourt) {
 export async function GetAllDistrictCourts() {
   try {
     const response = await axios.post(`${baseUrl}GetAllDistrictCourts`)
-   
      return response.data;
   } catch (error) {
     console.error(error);
@@ -35,13 +32,11 @@ export async function GetAllDistrictCourts() {
   }
 }
 
-export async function DeleteDistrictCourt(DistrictCourt:any) {
+export async function DeleteDistrictCourt(districtCourt:DistrictCourt) {
     try {
-      const response = await axios.post(`${baseUrl}DeleteDistrictCourt`, DistrictCourt);
-      console.log(response)
+      const response = await axios.post(`${baseUrl}DeleteDistrictCourt`, districtCourt);
       return response.data;
     } catch (error) {
-      console.error(error);
       return null;
     }
   }

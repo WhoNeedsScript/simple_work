@@ -9,7 +9,7 @@ interface LoginProps{}
 const Login:FC<LoginProps> = ({})=>
 {
     const [form,setForm]= useState("login");
-    
+ 
 
     
   const changeForm=(value:string)=>{

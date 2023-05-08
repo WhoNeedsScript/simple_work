@@ -5,13 +5,14 @@
 html,
 body,
 :root {
-  height: 100%;
+  min-height: 100vh;
+  
 }
 
 body {
   background-image:  url("ressources/images/vivid-blurred-colorful-background.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
+  background-repeat:no-repeat;
+  background-size:  cover;
 }
 
 

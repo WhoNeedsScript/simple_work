@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'https://localhost:7136/api/LegalFrom/'
+const baseUrl = 'http://37.120.161.198:3004/api/LegalFrom/'
 
 export async function CreateLegalForm(legalForm:any) {
   try {
@@ -34,9 +34,10 @@ export async function GetAllLegalForms() {
   }
 }
 
-export async function DeleteLegalForm(legalForm:any) {
+export async function DeleteLegalForm(uuid:string) {
     try {
-      const response = await axios.post(`${baseUrl}DeleteLegalForm`, legalForm);
+      console.log(uuid)
+      const response = await axios.post(`${baseUrl}DeleteLegalForm?uuid=${uuid}`);
       console.log(response)
       return response.data;
     } catch (error) {

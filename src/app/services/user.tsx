@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'https://localhost:7267/api/User/'
+const baseUrl = 'http://37.120.161.198:3000/api/User/'
 
 export async function CreateUser(user:any) {
   try {

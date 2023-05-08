@@ -9,6 +9,11 @@ import InputWithLable from '../general/inputs/InputWithLable';
 import LegalFormList from './LegalFormList';
 import CheckBoxWithLabel from '../general/checkboxes/CheckboxWithLabel';
 import ClientOnly from '../general/ClientOnly';
+import { useDispatch, useSelector } from 'react-redux';
+import { addLegalForm, addLegalForms, updateNewLegalForm } from '@/app/store/features/legalFormState';
+import { LegalForm } from '@/app/types/legalform.d';
+import LegalFormCheckBox from './LegalFormCheckbox';
+import legalForm from '../../services/legalForm';
 
 interface LegalFormDashboardProps{
   
@@ -18,69 +23,58 @@ const LegalFormDashboard:FC<LegalFormDashboardProps> = ({
   
 })=>
 {
-    const [name,setName] = useState('');
-    const [hbr,setHBR] = useState(false);
-    const [legalForms, setLegalForms] = useState([]);
+    const dispatch= useDispatch();
  
-    const changeName=(event:any)=>{
-        setName(event.target.value)
-      }
-      const changeHBR = (isChecked: boolean) => {
-   
-        setHBR(isChecked)
-      }
-    const changeLegalForms=(legalForms:any)=>
-    {
-        setLegalForms(legalForms)
-    }
-  
     useEffect(() => {
-        LegalFormService
-          .GetAllLegalForms()
-          .then(response => {
-            setLegalForms(response.resultLegalForms)
-          })
-      }, [])
-    
-   
-    
+      LegalFormService
+        .GetAllLegalForms()
+        .then(response => {
+          dispatch(addLegalForms(response.resultLegalForms))
+        })
+    }, []);
 
+    const newLegalForm = useSelector((state:any)=>state.legalFormState.newLegalForm)
+   
+    const changeName=(event:any, legalForm:LegalForm)=>{
+      let changeLegalForm:LegalForm = {...legalForm};
+      changeLegalForm.name = event.target.value
+      dispatch(updateNewLegalForm(changeLegalForm))
+    }
+    const changeHBR = (event:any, legalForm:LegalForm) => {
+      let changeLegalForm:LegalForm = {...legalForm};
+      changeLegalForm.hbr = event.target.checked
+      dispatch(updateNewLegalForm(changeLegalForm))
+      }
+    
     const createLegalForomHandle = (event:any)=>{
-        event.preventDefault();
-        /*if(newName === '' || newName ==='')
-        {
-          alert(`Please fill Name and Number`)
-          return
-        }
-        let user = {email:String,username:String,password:String};
-      */
-      
-        const legalFormObject:any = {
-            name: name,
-            hbr: hbr
-        }
-          
+      event.preventDefault();
+      if(newLegalForm.name.length !== 0 )
+      {
         LegalFormService
-          .CreateLegalForm(legalFormObject)
+          .CreateLegalForm(newLegalForm)
           .then(response => {
-            setHBR(false);
-            setName('');
-            setLegalForms(legalForms.concat(legalFormObject));
+            let changedLegalForm:LegalForm = {...newLegalForm};
+            changedLegalForm.uuid =  response
+            dispatch(addLegalForm(changedLegalForm))
+            dispatch(updateNewLegalForm({uuid:"",name: "",hbr: false}));
           })
-        }
-       
+      }
+    }  
 
     return(
-      
         <div>
-        
             <div className='flex place-content-between'>
-                <input type="text" placeholder='Name'value={name} onChange={changeName} className='input-text m-3'/>
-                <CheckBoxWithLabel text="HBR" checkedState={hbr} onChange={changeHBR} />  
+                <InputWithLable text='Name'
+                  textPosition='horizontal'
+                  placeholder='Name'
+                  value={newLegalForm.name}
+                  onChange={(event:any) => changeName(event, newLegalForm)}
+                   />
+                <LegalFormCheckBox checkedState={newLegalForm.hbr} onChange={(event:any) => changeHBR(event, newLegalForm)} />  
                 <Button onClick={createLegalForomHandle} text='Speichern'/>
             </div>
             <div>
-                <LegalFormList legalForms={legalForms} changeLegalForms={changeLegalForms}/>
+                <LegalFormList/>
             </div>
             
         </div>

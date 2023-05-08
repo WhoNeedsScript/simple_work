@@ -13,11 +13,12 @@ const Container:React.FC<ContainerProps> =({
     width,
     height
 })=>
-{   console.log(children)
+{  
     return(
         <div 
         className={`
-        fix 
+        fix
+        overflow-auto
         h-${height != undefined?height:"full"} 
         w-${width != undefined?height:"full"} 
         bg-white 

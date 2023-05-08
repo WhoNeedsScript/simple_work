@@ -2,12 +2,15 @@
 
 import {FC} from 'react'
 import ComboBox from './ComboBox'
+import { platform } from 'os'
 
 interface ComboBoxWithLabelProps{
     textPosition: "vertical" | "horizontal",
     data:any[],
     text:string,
-    onChange:any
+    onChange:any,
+    selected?:any,
+    placeholder?:string
 }
 
 const ComboboxWithLabel:FC<ComboBoxWithLabelProps> = ({
@@ -15,15 +18,17 @@ const ComboboxWithLabel:FC<ComboBoxWithLabelProps> = ({
     text,
     data,
     onChange,
+    placeholder,
+    selected
 })=>
 {
-    console.log(data)
+    
     return(
         textPosition ==  "vertical" ?
        (
             <div>
                 <p>{text}</p>
-                <ComboBox data={data} onChange={onChange}/>
+                <ComboBox placeholder={placeholder} data={data} selected={selected} onChange={onChange}/>
             </div>
         )
         : textPosition ==  "horizontal"?
@@ -32,7 +37,7 @@ const ComboboxWithLabel:FC<ComboBoxWithLabelProps> = ({
                 <div className="mr-4">
                 <p>{text}</p>
                 </div>
-                <ComboBox data={data} onChange={onChange}/>
+                <ComboBox placeholder={placeholder} data={data} selected={selected} onChange={onChange}/>
             </div>
         ):(<></>)
 

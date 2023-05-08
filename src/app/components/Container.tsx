@@ -13,14 +13,14 @@ const Container:React.FC<ContainerProps> =({
     height = "auto",
     width = "auto",
 })=>
-{   console.log(children)
+{   
     return(
         <div 
             className="
             flex
+            min-h-full
             justify-center
             items-center
-            h-screen
             max-w-[2520px]
             mx-auto
             xl:px-20
