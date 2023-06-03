@@ -1,9 +1,11 @@
 'use client'
 
-import {FC} from 'react'
+import {FC, useEffect} from 'react'
 import ComboboxWithLabel from '../general/combobox/ComboBoxWithLabel'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { OccupationCooperative } from '@/app/types/occupationCooperative.d'
+import OccupationCooperativeService from '../../services/occupationCooperative'
+import { addOccupationCooperatives } from '@/app/store/features/occupationCooperativeSlice'
 
 
 
@@ -18,6 +20,16 @@ const OccupationCooperativeComboBox:FC<OccupationCooperativeComboBoxProps> = ({
 })=>
 {   
     const occupationCooperatives = useSelector((state:any)=>state.occupationCooperativeState.occupationCooperatives);
+
+    const dispatch = useDispatch();
+
+  useEffect(() => {
+    OccupationCooperativeService
+      .GetAllOccupationCooperatives()
+      .then(response => {
+        dispatch(addOccupationCooperatives(response.resultOccupationCooperatives))
+      })
+  }, []);
 
     const values = occupationCooperatives.map((data:OccupationCooperative) => (
         { label: data.name, value: data.uuid }

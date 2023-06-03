@@ -81,7 +81,7 @@ const SignupForm:FC<SignupFormProps> = ({
             <input type="text" placeholder='email'value={email} onChange={changeEmail} className='input-text m-3'/>
             <input type="text" placeholder='username'value={username} onChange={changeUsername} className='input-text m-3'/>
             <input type="password" placeholder='password' value={password} onChange={changePassword} className='input-text m-3'/>
-            <Button onClick={signupUserHandler}  text='Sign Up'/>
+            <Button onClick={signupUserHandler}  label='Sign Up'/>
             <p className='ml-48' onClick={handleLoginClick}>Schon einen Account?</p>
             
           </form>

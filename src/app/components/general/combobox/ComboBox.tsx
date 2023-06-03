@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect } from "react";
-import { FC, use, useState } from "react";
+import { FC,  useState } from "react";
 import { InputActionMeta } from "react-select/dist/declarations/src";
 import Select from "react-select";
 import Option from "react-select/dist/declarations/src/components/Option";

@@ -7,6 +7,7 @@ import {occupationCooperativeSlice} from './features/occupationCooperativeSlice'
 import {districtCourtSlice} from './features/districtCourtSlice';
 import {companySlice} from './features/companySlice';
 import {userSlice} from './features/userSlice';
+import { createCompanyModelSlice } from './views/createCompanyModel';
 
 
 export const store = configureStore({
@@ -17,7 +18,8 @@ export const store = configureStore({
         occupationCooperativeState:occupationCooperativeSlice.reducer,
         districtCourtState:districtCourtSlice.reducer,
         companyState:companySlice.reducer,
-        userState:userSlice.reducer
+        userState:userSlice.reducer,
+        createCompanyModalState:createCompanyModelSlice.reducer
     }
 })
 

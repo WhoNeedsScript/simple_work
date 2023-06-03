@@ -17,10 +17,7 @@ const Container:React.FC<ContainerProps> =({
     return(
         <div 
         className={`
-        fix
         overflow-auto
-        h-${height != undefined?height:"full"} 
-        w-${width != undefined?height:"full"} 
         bg-white 
         bg-opacity-40
         rounded-2xl 

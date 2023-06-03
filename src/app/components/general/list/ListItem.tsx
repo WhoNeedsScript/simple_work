@@ -22,8 +22,8 @@ const ListItem:FC<ListItemProps> = ({
     return(
         <div className='flex place-content-between'>
             {children}
-            <Button text='Speichern' onClick={updateItem}/>
-            <Button text='Löschen' onClick={deleteItem}/>
+            <Button label='Speichern' onClick={updateItem}/>
+            <Button label='Löschen' onClick={deleteItem}/>
         </div>
     )
 }

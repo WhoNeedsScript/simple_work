@@ -1,10 +1,12 @@
 'use client'
 
-import {FC} from 'react'
+import {FC, useEffect} from 'react'
 import ComboboxWithLabel from '../general/combobox/ComboBoxWithLabel'
-import { useSelector } from 'react-redux'
-import { OccupationCooperative } from '@/app/types/occupationCooperative.d'
-import { TaxOffice } from '@/app/types/taxOffice.d'
+import { useDispatch, useSelector } from 'react-redux'
+import DistrictCourtService from '../../services/districtCourt'
+
+import { DistrictCourt } from '@/app/types/districtCourt.d'
+import { addDistrictCourts } from '@/app/store/features/districtCourtSlice'
 
 
 
@@ -20,14 +22,25 @@ const DistrictCourtComboBox:FC<DistrictCourtComboBoxProps> = ({
     placeholder
 })=>
 {   
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        DistrictCourtService
+          .GetAllDistrictCourts()
+          .then(response => {
+            dispatch(addDistrictCourts(response.resultDistrictCourts))
+          })
+    }, []);
+  
+
     const districtCourts = useSelector((state:any)=>state.districtCourtState.districtCourts);
 
-    const values = districtCourts.map((data:TaxOffice) => (
+    const values = districtCourts.map((data:DistrictCourt) => (
         { label: `${data.name} ${data.federalState.abbreviation}`, value: data.uuid }
     ))
 
     return(
-      <ComboboxWithLabel text='Finanzamt' textPosition='horizontal' selected={selected} placeholder={placeholder}  data={values} onChange={onChange}/>
+      <ComboboxWithLabel text='Amtsgericht' textPosition='horizontal' selected={selected} placeholder={placeholder}  data={values} onChange={onChange}/>
     )
 }
 

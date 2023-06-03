@@ -1,9 +1,11 @@
 "use client";
 
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import ComboboxWithLabel from "../general/combobox/ComboBoxWithLabel";
 import { FederalState } from "@/app/types/federalState.d";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import FederalStateService from '../../services/federalState'
+import { addFederalStates } from "@/app/store/features/federalStateSlice";
 
 interface FederalStateComboBoxProps {
   onChange: any;
@@ -16,6 +18,16 @@ const FederalStateComboBox: FC<FederalStateComboBoxProps> = ({
   selected,
   placeholder
 }) => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+      FederalStateService
+        .GetAllFederalStates()
+        .then(response => {
+          dispatch(addFederalStates(response.resultFederalStates))
+        })
+  }, []);
+
   const federalStates = useSelector(
     (state: any) => state.federalStateState.federalStates
   );

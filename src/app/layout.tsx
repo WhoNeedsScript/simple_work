@@ -1,6 +1,6 @@
 
 import Providers from './components/general/Providers'
-import Navbar from './components/navbar/Navbar'
+import Navbar from './components/general/sidebar/Sidebar'
 import './globals.css'
 
 export const metadata = {
@@ -15,7 +15,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className='min-h-screen w-screen fix'>
+      <body>
        <Providers>
          {children}
        </Providers>

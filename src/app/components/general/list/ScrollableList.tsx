@@ -9,7 +9,7 @@ const ScrollableList: React.FC<ListItemProps> = ({
     children 
 }) => {
   return (
-    <div className="h-64 overflow-y-scroll">
+    <div className="overflow-y-auto">
       <ul className="list-none">
         {children}
       </ul>

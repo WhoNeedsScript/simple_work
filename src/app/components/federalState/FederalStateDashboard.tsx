@@ -75,7 +75,7 @@ const FederalStateDashboard:FC<FederalStateDashboardProps> = ({
                     placeholder='Name'
                     value={newFederalState.name} 
                     onChange={(event:any) => changeName(event, newFederalState)}/>
-                <Button onClick={createFederalStateHandle} text='Speichern'/>
+                <Button onClick={createFederalStateHandle} label='Speichern'/>
             </div>
             <div>
                 <FederalStateList />

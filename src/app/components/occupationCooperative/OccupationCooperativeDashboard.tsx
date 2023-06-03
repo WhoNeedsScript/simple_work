@@ -78,7 +78,7 @@ const OccupationCooperativeDashboard:FC<OccupationCooperativeDashboardProps> = (
                   value={newOccupationCooperative.description}
                   onChange={(event:any) => changeDescription(event, newOccupationCooperative)}
                    />
-                <Button onClick={createOccupationCooperativeHandle} text='Speichern'/>
+                <Button onClick={createOccupationCooperativeHandle} label='Speichern'/>
             </div>
             <div>
                 <OccupationCooperativeList/>

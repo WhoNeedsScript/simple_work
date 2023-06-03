@@ -1,19 +1,16 @@
 'use client';
 
 import {FC, use, useEffect, useState} from 'react'
-import Input from '../general/inputs/input';
-import Link from 'next/link';
+
 import Button from '../glassmorph/Button';
 import LegalFormService from '../../services/legalForm'
 import InputWithLable from '../general/inputs/InputWithLable';
 import LegalFormList from './LegalFormList';
-import CheckBoxWithLabel from '../general/checkboxes/CheckboxWithLabel';
-import ClientOnly from '../general/ClientOnly';
 import { useDispatch, useSelector } from 'react-redux';
 import { addLegalForm, addLegalForms, updateNewLegalForm } from '@/app/store/features/legalFormState';
 import { LegalForm } from '@/app/types/legalform.d';
 import LegalFormCheckBox from './LegalFormCheckbox';
-import legalForm from '../../services/legalForm';
+
 
 interface LegalFormDashboardProps{
   
@@ -71,7 +68,7 @@ const LegalFormDashboard:FC<LegalFormDashboardProps> = ({
                   onChange={(event:any) => changeName(event, newLegalForm)}
                    />
                 <LegalFormCheckBox checkedState={newLegalForm.hbr} onChange={(event:any) => changeHBR(event, newLegalForm)} />  
-                <Button onClick={createLegalForomHandle} text='Speichern'/>
+                <Button onClick={createLegalForomHandle} label='Speichern'/>
             </div>
             <div>
                 <LegalFormList/>

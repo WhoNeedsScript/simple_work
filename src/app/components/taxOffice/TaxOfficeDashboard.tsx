@@ -98,7 +98,7 @@ const TaxOfficeDashboard:FC<TaxOfficeDashboardProps> = ({
             onChange={(event:any) => changeNumber(event, localselectedTaxOffice)}
           />
           <FederalStateComboBox selected={localselectedTaxOffice.federalState} onChange={(event:any) => changeFederalState(event, localselectedTaxOffice)} />
-          <Button onClick={createTaxOfficeHandle} text="Speichern" />
+          <Button onClick={createTaxOfficeHandle} label="Speichern" />
         </div>
         <div>
           <TaxOfficeList />

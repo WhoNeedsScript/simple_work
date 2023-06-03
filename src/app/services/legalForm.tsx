@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'http://37.120.161.198:3004/api/LegalFrom/'
+const baseUrl = 'http://37.120.161.198:3004/api/LegalForm/'
 
 export async function CreateLegalForm(legalForm:any) {
   try {

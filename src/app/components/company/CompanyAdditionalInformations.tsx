@@ -13,6 +13,8 @@ import { Company } from "@/app/types/company.d";
 import { selectTaxOfficeByUuid } from "@/app/store/features/taxOfficeSlice";
 import { updateNewCompany } from "@/app/store/features/companySlice";
 import { selectOccupationCooperativeByUuid } from "@/app/store/features/occupationCooperativeSlice";
+import { selectDistrictCourtByUuid } from "@/app/store/features/districtCourtSlice";
+import DistrictCourtComboBox from "../districtCourt/DistrictCourtComboBox";
 
 interface CompanyAdditionalInformationsProps {}
 
@@ -36,6 +38,10 @@ const CompanyAdditionalInformations: FC<
       dispatch(updateNewCompany(changedCompany));
     }
   };
+
+
+
+
 
   const changeSteuerIdent = (event: any) => {
     let changedCompany: Company = { ...newCompany };
@@ -82,16 +88,17 @@ const CompanyAdditionalInformations: FC<
       <p>Zusätzliche Informationen</p>
 
       <div className="flex flex-col items-start">
-        <InputWithLable
+      <InputWithLable
           textPosition={"horizontal"}
           text={"Betriebsnummer"}
           value={newCompany.companyNumber}
           onChange={changeBetriebsnummer}
         />
+        
         <TaxOfficeComboBox onChange={changeFinanzamt} />
         <InputWithLable
           textPosition={"horizontal"}
-          text={"SteuerIdent"}
+          text={"SteuerIdnet"}
           value={newCompany.steuerIdent}
           onChange={changeSteuerIdent}
         />

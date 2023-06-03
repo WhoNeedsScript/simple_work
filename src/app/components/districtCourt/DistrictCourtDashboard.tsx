@@ -84,7 +84,7 @@ const DistrictCourtDashboard:FC<DistrictCourtDashboardProps> = ({
             onChange={(event:any) => changeName(event, newDistrictCourt)}
           />
           <FederalStateComboBox selected={newDistrictCourt.federalState} onChange={(event:any) => changeFederalState(event, newDistrictCourt)} />
-          <Button onClick={createTaxOfficeHandle} text="Speichern" />
+          <Button onClick={createTaxOfficeHandle} label="Speichern" />
         </div>
         <div>
           <TaxOfficeList />

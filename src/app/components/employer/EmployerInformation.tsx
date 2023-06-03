@@ -3,9 +3,9 @@
 import {FC, useState} from 'react'
 import ClientOnly from '../general/ClientOnly';
 import Container from '../glassmorph/Container';
-import Sidebar from '../general/sidebar/Sidebar';
 import CompanyGeneralInformations from './EmployerGeneralInformations';
 import CompanyAdditionalInformations from './EmployerAdditionalInformations';
+import Sidebar from '../general/sidebar/Sidebar';
 enum ResultType {
     FULL = "full",
     SEMI_FULL = "semi-full",
@@ -88,7 +88,7 @@ const CompanyInformations:FC<CompanyGeneralInformationsProps> = ({
             <ClientOnly>  
                 <div className='m-10 flex-grow text-center'>
                         <div className='flex justify-between'>
-                            <Sidebar text={textData}/>    
+                            <Sidebar children={[<p>f</p>,<p>f</p>]}/>    
                             <div className='m-10 flex-grow text-center'>
                                 <h1>Unternehmen Erstellen</h1>
                             <Container> 

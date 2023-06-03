@@ -77,6 +77,12 @@ const CompanyGeneralInformations: FC<CompanyGeneralInformationsProps> = ({
     dispatch(updateNewCompany(changedCompany));
   };
 
+  const changeMobilenumber= (event: any) => {
+    let changedCompany: Company = { ...newCompany };
+    changedCompany.mobilenumber = event.target.value;
+    dispatch(updateNewCompany(changedCompany));
+  };
+
   const changeStreetNumber = (event: any) => {
     let changedCompany: Company = { ...newCompany };
     changedCompany.streetnumber = event.target.value;
@@ -92,6 +98,12 @@ const CompanyGeneralInformations: FC<CompanyGeneralInformationsProps> = ({
   const changeCity = (event: any) => {
     let changedCompany: Company = { ...newCompany };
     changedCompany.city = event.target.value;
+    dispatch(updateNewCompany(changedCompany));
+  };
+
+  const changePostcode = (event: any) => {
+    let changedCompany: Company = { ...newCompany };
+    changedCompany.postcode = event.target.value;
     dispatch(updateNewCompany(changedCompany));
   };
 
@@ -202,6 +214,13 @@ const CompanyGeneralInformations: FC<CompanyGeneralInformationsProps> = ({
           value={newCompany.eMail}
           onChange={changeEmail}
         />
+        <InputWithLable
+          text="Telefonnummer*"
+          placeholder="Pflicht"
+          textPosition="horizontal"
+          value={newCompany.mobilenumber}
+          onChange={changeMobilenumber}
+        />
       </div>
 
       <p>Adresse</p>
@@ -219,6 +238,13 @@ const CompanyGeneralInformations: FC<CompanyGeneralInformationsProps> = ({
           textPosition="horizontal"
           value={newCompany.streetnumber}
           onChange={changeStreetNumber}
+        />
+        <InputWithLable
+          text="PLZ*"
+          placeholder="Pflicht"
+          textPosition="horizontal"
+          value={newCompany.postcode}
+          onChange={changePostcode}
         />
         <InputWithLable
           text="Stadt*"
@@ -240,7 +266,7 @@ const CompanyGeneralInformations: FC<CompanyGeneralInformationsProps> = ({
         />
       </div>
 
-      <Button onClick={AddGeneralInformationsHadler} text="Weiter" />
+      <Button onClick={AddGeneralInformationsHadler} label="Weiter" />
     </form>
   );
 };

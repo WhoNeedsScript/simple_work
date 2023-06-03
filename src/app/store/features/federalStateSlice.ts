@@ -11,7 +11,8 @@ export interface FederalStateState{
 
 const initialState:FederalStateState={
     federalStates:[],
-    newFederalState:{name:"",abbreviation:""}
+    newFederalState:{name:"",abbreviation:""},
+    
 };
 
 export const federalStateSlice = createSlice({

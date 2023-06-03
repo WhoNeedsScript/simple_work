@@ -90,6 +90,7 @@ export const companySlice = createSlice({
            state.newCompany = action.payload;
         },
 
+
         updateCompanyByUuid:(state,action:PayloadAction<Company>)=>{
             const updatedCompany = action.payload;
             const updatedCompaniesList:Company[] = state.companies.map((company:Company) => {

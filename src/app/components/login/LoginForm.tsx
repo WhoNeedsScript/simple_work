@@ -73,7 +73,7 @@ const LoginForm: FC<LoginFormProps> = ({ changeForm }) => {
         onChange={changePassword}
         className="input-text m-3"
       />
-      <Button onClick={loginUserHandler} text="Login" />
+      <Button onClick={loginUserHandler} label="Login" />
       <p className="ml-48" onClick={handleSignupClick}>
         Noch keinen Account?
       </p>

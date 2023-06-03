@@ -1,32 +1,22 @@
-'use client'
-
-import {FC, useState} from 'react'
+import Container from "../../Container";
+import Button from "../../glassmorph/Button";
+import Logo from "./Logo";
 
 interface SidebarProps{
-    text:any,
-   
-   
+    children: React.ReactNode;
+    width?:Number;
+    height?:Number;
 }
 
-const Sidebar:FC<SidebarProps> = ({
-    text  
-    
-})=>
-{
+const Sidebar:React.FC<SidebarProps> =({
+    children,
+    width,
+    height
+})=>{
     return(
-        <div className="fix items-left">
-             <div className="mr-4">
-            {   
-                text != null ?
-                text.map((textObject:any) => (
-                    console.log(textObject.color),
-                    <p key={textObject.text} className={`${textObject.color} !important`}>{textObject.text}</p>
-                   ))
-                :<div/>
-            }
-             </div>
+        <div className="flex flex-col gap-3"> 
+         {children}
         </div>
     )
 }
-
-export default Sidebar
+export default Sidebar;
